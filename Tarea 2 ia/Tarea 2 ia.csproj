@@ -46,7 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CLAlgoritmosDeBusqueda.cs" />
     <Compile Include="CLEstado.cs" />
+    <Compile Include="FRMHijos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FRMHijos.Designer.cs">
+      <DependentUpon>FRMHijos.cs</DependentUpon>
+    </Compile>
     <Compile Include="FRMOchoPuzzle.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -55,6 +62,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FRMHijos.resx">
+      <DependentUpon>FRMHijos.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FRMOchoPuzzle.resx">
       <DependentUpon>FRMOchoPuzzle.cs</DependentUpon>
     </EmbeddedResource>
