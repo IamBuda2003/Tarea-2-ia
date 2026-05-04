@@ -84,20 +84,6 @@ namespace Tarea_2_ia
             }
         }
 
-        private void LBL02_Click(object sender, EventArgs e)
-        {
-            if (LBL01.Text == "0")
-            {
-                LBL01.Text = LBL02.Text;
-                LBL02.Text = "0";
-            }
-            else if (LBL12.Text == "0")
-            {
-                LBL12.Text = LBL02.Text;
-                LBL02.Text = "0";
-            }
-        }
-
         private void LBL11_Click(object sender, EventArgs e)
         {
             if (LBL01.Text == "0")
