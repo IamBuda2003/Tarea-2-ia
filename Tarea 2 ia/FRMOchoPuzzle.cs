@@ -17,6 +17,8 @@ namespace Tarea_2_ia
         private String[,] posiciones;
         private List<CLEstado> Solucion = new List<CLEstado>();
         private List<CLEstado> Original = new List<CLEstado>();
+        private CLEstado IniGuardado;
+        private bool Regreso = false;
         private int PasoSolucion = 0;
         public FRMOchoPuzzle()
         {
@@ -539,5 +541,65 @@ namespace Tarea_2_ia
                 MessageBox.Show("Estado Original");
             }
         }
+
+        private void BTNProfundidadLimitada_Click(object sender, EventArgs e)
+        {
+            CLEstado Inicial = new CLEstado(
+                   Convert.ToInt32(LBL00.Text),
+                   Convert.ToInt32(LBL01.Text),
+                   Convert.ToInt32(LBL02.Text),
+                   Convert.ToInt32(LBL10.Text),
+                   Convert.ToInt32(LBL11.Text),
+                   Convert.ToInt32(LBL12.Text),
+                   Convert.ToInt32(LBL20.Text),
+                   Convert.ToInt32(LBL21.Text),
+                   Convert.ToInt32(LBL22.Text)
+                   );
+
+            int Limite = Convert.ToInt32(NUDLimitada.Value);
+            Solucion = CLAlgoritmosDeBusqueda.ProfundidadLimitada(Inicial, Limite);
+
+            if (Solucion.Count > 0)
+            {
+                MessageBox.Show("Solución Encontrada: " + (Solucion.Count - 1) + " pasos");
+                PasoSolucion = 0;
+                TMRProLim.Enabled = true;
+            }
+            else
+            {
+                MessageBox.Show("Solución No Encontrada dentro del límite");
+            }
+        }    
+        
+
+        private void TMRProLim_Tick(object sender, EventArgs e)
+        {
+            if (PasoSolucion < Solucion.Count)
+            {
+                CLEstado A = Solucion[PasoSolucion];
+
+                LBL00.Text = A.tablero[0, 0].ToString();
+                LBL01.Text = A.tablero[0, 1].ToString();
+                LBL02.Text = A.tablero[0, 2].ToString();
+                LBL10.Text = A.tablero[1, 0].ToString();
+                LBL11.Text = A.tablero[1, 1].ToString();
+                LBL12.Text = A.tablero[1, 2].ToString();
+                LBL20.Text = A.tablero[2, 0].ToString();
+                LBL21.Text = A.tablero[2, 1].ToString();
+                LBL22.Text = A.tablero[2, 2].ToString();
+
+                LBLContador.Text = "Paso " + PasoSolucion;
+                PasoSolucion++;
+            }
+            else
+            {
+                TMRProLim.Enabled = false;
+                LBLContador.Text = "Resuelto";
+                MessageBox.Show("Resuelto en " + (Solucion.Count - 1) + " pasos");
+                PasoSolucion = 0;
+            }
+        }
+
+        
     }
 }
